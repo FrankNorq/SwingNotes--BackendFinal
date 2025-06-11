@@ -13,3 +13,11 @@ export const dbcreateUser = async (email, name, hashedPassword) => {
     throw error;
   }
 };
+
+export const dbCheckEmail = async (email) => {
+  const result = await pool.query(
+    `SELECT id AS user_id, email, password_hash AS password FROM users WHERE email = $1`,
+    [email]
+  );
+  return result;
+};

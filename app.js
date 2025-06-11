@@ -1,9 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
+import attachPool from "./controllers/middleware/attachpool.js";
 import usersRoute from "./router/users.js";
 import notesRoute from "./router/notes.js";
+dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(attachPool);
 app.use("/api/notes", notesRoute);
 app.use("/api/users", usersRoute);
 export default app;
