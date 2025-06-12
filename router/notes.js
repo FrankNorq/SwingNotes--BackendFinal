@@ -3,6 +3,7 @@ import {
   getNotes,
   updateNote,
   deleteNote,
+  searchNotes,
 } from "../controllers/notes.controller.js";
 import verifyJWT from "../controllers/middleware/verifyJWT.js";
 import express from "express";
@@ -12,6 +13,6 @@ router.get("/", getNotes);
 router.post("/", createNote);
 router.put("/:id", updateNote);
 router.delete("/:id", deleteNote);
-// router.get("/search", );
+router.get("/search", searchNotes);
 
 export default router;

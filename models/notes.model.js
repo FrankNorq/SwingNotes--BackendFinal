@@ -31,3 +31,12 @@ export const dbDeleteNote = async (userId, noteId) => {
     [noteId, userId]
   );
 };
+
+export const dbSearchNotes = async (userId, query) => {
+  return await pool.query(
+    `SELECT * FROM notes
+    WHERE user_id = $1 AND LOWER(title) LIKE LOWER($2)
+     ORDER BY createdAt DESC`,
+    [userId, `%${query}%`]
+  );
+};

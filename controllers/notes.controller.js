@@ -3,6 +3,7 @@ import {
   dbCreateNote,
   dbUpdateNote,
   dbDeleteNote,
+  dbSearchNotes,
 } from "../models/notes.model.js";
 
 export const getNotes = async (req, res) => {
@@ -60,5 +61,22 @@ export const deleteNote = async (req, res) => {
     res.status(200).json({ message: "Note deleted" });
   } catch (error) {
     res.status(500).json({ error: "Could not delete note" });
+  }
+};
+
+export const searchNotes = async (req, res) => {
+  const userId = req.user.user_id;
+  const query = req.query.q;
+
+  if (!query) {
+    return res
+      .status(500)
+      .json({ error: "ur missing the query parameter (q)" });
+  }
+  try {
+    const result = await dbSearchNotes(userId, query);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: "no notes found" });
   }
 };
