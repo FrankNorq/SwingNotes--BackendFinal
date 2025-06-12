@@ -38,13 +38,7 @@ SwingNotes är en RESTful API-tjänst där användare kan skapa, läsa, uppdater
 - CREATE DATABASE swingnotes;
 
 - 🧠 Se till att databasnamnet matchar det i config/db.js. Exempel:
-- const pool = new Pool({
--   user: "postgres",
--   host: "localhost",
- -  database: "swingnotes",
- -  password: "123",      // Ändra till ditt riktiga lösenord
- -  port: 5432,
-- });
+
 - Skapa .env-fil
 - skriv in detta i env
 - PORT=8000
