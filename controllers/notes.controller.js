@@ -5,11 +5,10 @@ import {
   dbDeleteNote,
 } from "../models/notes.model.js";
 
-const tempUserId = 3; // Byt till `req.user.user_id` när JWT är på plats
-
 export const getNotes = async (req, res) => {
+  const userId = req.user.user_id;
   try {
-    const result = await dbGetNotes(tempUserId);
+    const result = await dbGetNotes(userId);
     res.status(200).json(result.rows);
   } catch (error) {
     res.status(500).json({ error: "Could not fetch notes" });
@@ -17,6 +16,7 @@ export const getNotes = async (req, res) => {
 };
 
 export const createNote = async (req, res) => {
+  const userId = req.user.user_id;
   const { title, text } = req.body;
 
   if (!title || !text) {
@@ -24,7 +24,7 @@ export const createNote = async (req, res) => {
   }
 
   try {
-    const result = await dbCreateNote(tempUserId, title, text);
+    const result = await dbCreateNote(userId, title, text);
 
     res.status(201).json(result.rows[0]);
   } catch (error) {
@@ -33,11 +33,12 @@ export const createNote = async (req, res) => {
 };
 
 export const updateNote = async (req, res) => {
+  const userId = req.user.user_id;
   const noteId = req.params.id;
   const { title, text } = req.body;
 
   try {
-    const result = await dbUpdateNote(tempUserId, noteId, title, text);
+    const result = await dbUpdateNote(userId, noteId, title, text);
     if (result.rowCount === 0) {
       return res.status(404).json({ error: "Note not found or not yours" });
     }
@@ -48,10 +49,11 @@ export const updateNote = async (req, res) => {
 };
 
 export const deleteNote = async (req, res) => {
+  const userId = req.user.user_id;
   const noteId = req.params.id;
 
   try {
-    const result = await dbDeleteNote(tempUserId, noteId);
+    const result = await dbDeleteNote(userId, noteId);
     if (result.rowCount === 0) {
       return res.status(404).json({ error: "Note not found or not yours" });
     }
