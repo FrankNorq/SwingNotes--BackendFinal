@@ -29,34 +29,31 @@ SwingNotes är en RESTful API-tjänst där användare kan skapa, läsa, uppdater
 
 1. **Kloning av repo**
    ```bash
-   git clone https://github.com/ditt-användarnamn/swingnotes.git
+   git clone på detta repot
    cd swingnotes
-Installera beroenden
-npm install
-Skapa PostgreSQL-databasen
-Öppna pgAdmin eller terminal och kör:
-CREATE DATABASE swingnotes;
+- Installera beroenden
+- npm install
+- Skapa PostgreSQL-databasen
+- Öppna pgAdmin eller terminal och kör:
+- CREATE DATABASE swingnotes;
 
-🧠 Se till att databasnamnet matchar det i config/db.js. Exempel:
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "swingnotes",
-  password: "123",      // Ändra till ditt riktiga lösenord
-  port: 5432,
-});
-Skapa .env-fil
-skriv in detta i env
-PORT=8000
-JWT_SECRET=dinSuperHemligaJWTnyckel
-🔐 JWT_SECRET används för att skapa och verifiera JWT-tokens vid inloggning.
+- 🧠 Se till att databasnamnet matchar det i config/db.js. Exempel:
+- const pool = new Pool({
+-   user: "postgres",
+-   host: "localhost",
+ -  database: "swingnotes",
+ -  password: "123",      // Ändra till ditt riktiga lösenord
+ -  port: 5432,
+- });
+- Skapa .env-fil
+- skriv in detta i env
+- PORT=8000
+- JWT_SECRET=dinSuperHemligaJWTnyckel
+- 🔐 JWT_SECRET används för att skapa och verifiera JWT-tokens vid inloggning.
 
-Starta servern
+- Starta servern
 
-bash
-Kopiera
-Redigera
-npm run dev
+node server.js
 Backend körs nu på http://localhost:8000
 
 Testa API med Swagger
