@@ -11,6 +11,8 @@
  *   get:
  *     summary: Get all notes for the current user
  *     tags: [Notes]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of notes
@@ -20,10 +22,12 @@
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Note'
- *
+
  *   post:
  *     summary: Create a new note
  *     tags: [Notes]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -36,10 +40,10 @@
  *             properties:
  *               title:
  *                 type: string
- *                 example: "Min titel"
+ *                 example: Min titel
  *               text:
  *                 type: string
- *                 example: "Detta är innehållet"
+ *                 example: Detta är innehållet
  *     responses:
  *       201:
  *         description: Note created successfully
@@ -53,6 +57,8 @@
  *   put:
  *     summary: Update a note by ID
  *     tags: [Notes]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -85,6 +91,8 @@
  *   delete:
  *     summary: Delete a note by ID
  *     tags: [Notes]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -101,7 +109,40 @@
 
 /**
  * @swagger
+ * /api/notes/search:
+ *   get:
+ *     summary: Search notes by title
+ *     tags: [Notes]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Title to search for
+ *     responses:
+ *       200:
+ *         description: Notes matching the search query
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Note'
+ *       400:
+ *         description: Query parameter is missing
+ */
+
+/**
+ * @swagger
  * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Note:
  *       type: object

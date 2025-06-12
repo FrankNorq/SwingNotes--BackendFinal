@@ -7,7 +7,7 @@
 
 /**
  * @swagger
- * /api/users/register:
+ * /api/users/signup:
  *   post:
  *     summary: Register a new user
  *     tags: [Users]
@@ -34,15 +34,19 @@
  *     responses:
  *       201:
  *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
  *       400:
- *         description: Invalid input
+ *         description: Invalid input or user already exists
  */
 
 /**
  * @swagger
  * /api/users/login:
  *   post:
- *     summary: Log in a user and get a token
+ *     summary: Log in a user and receive a JWT token
  *     tags: [Users]
  *     requestBody:
  *       required: true
@@ -63,6 +67,35 @@
  *     responses:
  *       200:
  *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Login Success!!
+ *                 token:
+ *                   type: string
+ *                   example: eyJhbGciOiJIUzI1NiIsInR...
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized – wrong credentials
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         email:
+ *           type: string
+ *         name:
+ *           type: string
+ *         createdAt:
+ *           type: string
+ *           format: date-time
  */
